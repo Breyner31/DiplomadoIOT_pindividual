@@ -43,6 +43,10 @@
 
 /* TODO: insert other definitions and declarations here. */
 
+
+unsigned int test_global_var=100;
+float dato_float=3.1416;
+
 /*
  * @brief   Application entry point.
  */
@@ -57,13 +61,16 @@ int main(void) {
     BOARD_InitDebugConsole();
 #endif
 
-    PRINTF("Hello World\n");
+    PRINTF("Hello World\r\n");
+    printf("test_global_var:%d\r\n", test_global_var);
+    printf("dato_float:%g\r\n",dato_float);
 
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;
     /* Enter an infinite loop, just incrementing a counter. */
     while(1) {
         i++ ;
+        printf("i:%u",i);
         /* 'Dummy' NOP to allow source level single stepping of
             tight while() loop */
         __asm volatile ("nop");

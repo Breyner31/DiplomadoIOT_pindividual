@@ -60,6 +60,7 @@ void delay_block(void){
  * @brief   Application entry point.
  */
 int main(void) {
+int cont=0;
 
     /* Init board hardware. */
     BOARD_InitBootPins();
@@ -75,6 +76,7 @@ int main(void) {
     printf("dato_float:%g\r\n",dato_float);
 
     encender_led_verde();
+    encender_led_rojo();
 
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;
@@ -86,9 +88,26 @@ int main(void) {
         delay_block();
         apagar_led_verde();
         delay_block();
+
+        if (i % 10 == 0){
+               	cont++;
+               	if (cont % 2 == 0){
+               	 apagar_led_rojo();
+               	}
+               	else{
+               	 encender_led_rojo();
+               	}
+               }
+               PRINTF("i:%u\r\n",i);
+
+
+
+
+
         /* 'Dummy' NOP to allow source level single stepping of
             tight while() loop */
         __asm volatile ("nop");
+
     }
     return 0 ;
 }

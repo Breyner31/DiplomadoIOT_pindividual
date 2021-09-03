@@ -39,6 +39,8 @@
 #include "clock_config.h"
 #include "K32L2B31A.h"
 #include "fsl_debug_console.h"
+
+#include "led.h"
 /* TODO: insert other include files here. */
 
 /* TODO: insert other definitions and declarations here. */
@@ -47,6 +49,13 @@
 unsigned int test_global_var=100;
 float dato_float=3.1416;
 
+
+void delay_block(void){
+	uint32_t i;
+	for(i=0;i<0xFFFFf;i++){
+
+	}
+}
 /*
  * @brief   Application entry point.
  */
@@ -65,12 +74,18 @@ int main(void) {
     printf("test_global_var:%d\r\n", test_global_var);
     printf("dato_float:%g\r\n",dato_float);
 
+    encender_led_verde();
+
     /* Force the counter to be placed into memory. */
     volatile static int i = 0 ;
     /* Enter an infinite loop, just incrementing a counter. */
     while(1) {
         i++ ;
-        printf("i:%u",i);
+        printf("i:%u\r\n",i);
+        encender_led_verde();
+        delay_block();
+        apagar_led_verde();
+        delay_block();
         /* 'Dummy' NOP to allow source level single stepping of
             tight while() loop */
         __asm volatile ("nop");

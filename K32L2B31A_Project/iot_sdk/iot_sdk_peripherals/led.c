@@ -50,3 +50,17 @@
        //apaga led verde
 	 GPIO_PinWrite(GPIOD,5,1);
  }
+
+ /*------------------------------------------------------------------------------*/
+ void encender_led_rojo(){
+	 //enciende led rojo
+	 GPIO_PinWrite(GPIOE,31,0);
+
+ }
+
+ /*----------------------------------------------------------------------------------*/
+ void apagar_led_rojo(){
+	   //apaga led rojo
+	 GPIO_PinWrite(GPIOE,31,1);
+
+ }

@@ -1,24 +1,24 @@
-/*! @file : led.h
+/*! @file : botones.h
  * @author  Breyner Lopez Granados
  * @version 1.0.0
- * @date    2/09/2021
- * @brief   Driver para controlar LEDS de tarjeta FRDM-K32L1B3
+ * @date    7/09/2021
+ * @brief   Driver para lectura de botones en FRDM-K32L2B
  * @details
  *
  */
-#ifndef IOT_SDK_PERIPHERALS_LED_H_
-#define IOT_SDK_PERIPHERALS_LED_H_
+#ifndef IOT_SDK_PERIPHERALS_BOTONES_H_
+#define IOT_SDK_PERIPHERALS_BOTONES_H_
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-
-
+#include "peripherals.h"
+#include "fsl_gpio.h"
 /*!
  * @addtogroup PERIPHERALS
  * @{
  */
 /*!
- * @addtogroup LEDS
+ * @addtogroup BOTONES
  * @{
  */
 /*******************************************************************************
@@ -36,25 +36,10 @@
 /*******************************************************************************
  * Public Prototypes
  ******************************************************************************/
+bool boton1leerestado();
+bool boton2leerestado();
 
-//@brief enciende led verde de la tarjeta FRMD-K32L2B3
- void encender_led_verde();
+/** @} */ // end of BOTONES group
+/** @} */ // end of PERIPHERALS group
 
- //@brief apaga led verde de la tarjeta FRMD-K32L2B3
- void apagar_led_verde();
-
- //@brief enciende led rojo de la tarjeta FRMD-K32L2B3
- void encender_led_rojo();
-
-
- //@brief apaga led rojo de la tarjeta FRMD-K32L2B3
- void apagar_led_rojo();
-
-
- //@brief Invierte el estado del led rojo de la tarjeta FRMD-K32L2B3
- void toggle_led_rojo();
-
-/** @} */ // end of X LEDS
-/** @} */ // end of X PERIPHERALS
-
-#endif /* IOT_SDK_PERIPHERALS_LED_H_ */
+#endif /* IOT_SDK_PERIPHERALS_BOTONES_H_ */

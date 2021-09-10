@@ -42,8 +42,9 @@
  //@brief Retorna del resultado de la conversión ADC para sensor de luz
   *
   */
- uint32_t  SensorDeluzOptenerDatosADC(void);
-
+float  SensorDeluzOptenerDatosADC(void);
+ void sensorDeLuzEsperarResultado(void);
+  float sensorDeLuzObtenerDatosADC(void);
 
 
 /** @} */ // end of SENSOR_DE_LUZ group

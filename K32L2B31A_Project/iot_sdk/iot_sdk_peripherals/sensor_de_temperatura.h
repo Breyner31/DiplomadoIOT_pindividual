@@ -1,30 +1,32 @@
-/*! @file : led.h
+/*! @file : sensor_de_temperatura.h
  * @author  Breyner Lopez Granados
  * @version 1.0.0
- * @date    2/09/2021
- * @brief   Driver para controlar LEDS de tarjeta FRDM-K32L1B3
+ * @date    9/09/2021
+ * @brief   Driver para 
  * @details
  *
  */
-#ifndef IOT_SDK_PERIPHERALS_LED_H_
-#define IOT_SDK_PERIPHERALS_LED_H_
+#ifndef IOT_SDK_PERIPHERALS_SENSOR_DE_TEMPERATURA_H_
+#define IOT_SDK_PERIPHERALS_SENSOR_DE_TEMPERATURA_H_
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-
+#include"peripherals.h"
 
 /*!
  * @addtogroup PERIPHERALS
  * @{
  */
 /*!
- * @addtogroup LEDS
+ * @addtogroup SENSOR_DE_TEMPERATURA
  * @{
  */
 /*******************************************************************************
  * Public Definitions
  ******************************************************************************/
-
+#define SENSOR_DE_TEMPERATURA_ADC16_BASE          ADC0
+#define SENSOR_DE_TEMPERATURA_ADC16_CHANNEL_GROUP 0U
+#define SENSOR_DE_TEMPERATURA_ADC16_USER_CHANNEL  26U /* PTE22, ADC0_SE3 */
 /*******************************************************************************
  * External vars
  ******************************************************************************/
@@ -36,25 +38,10 @@
 /*******************************************************************************
  * Public Prototypes
  ******************************************************************************/
+void sensorDetemperaturaIniciarCaptura(void);
+ void sensorDetemperaturaEsperarResultado(void);
+ float SensorDetemperaturaObtenerDatosADC(void);
+/** @} */ // end of SENSOR_DE_TEMPERATURA group
+/** @} */ // end of PERIPHERALS group
 
-//@brief enciende led verde de la tarjeta FRMD-K32L2B3
- void encender_led_verde();
-
- //@brief apaga led verde de la tarjeta FRMD-K32L2B3
- void apagar_led_verde();
-
- //@brief enciende led rojo de la tarjeta FRMD-K32L2B3
- void encender_led_rojo();
-
-
- //@brief apaga led rojo de la tarjeta FRMD-K32L2B3
- void apagar_led_rojo();
-
-
- //@brief Invierte el estado del led rojo de la tarjeta FRMD-K32L2B3
- void toggle_led_rojo();
-
-/** @} */ // end of X LEDS
-/** @} */ // end of X PERIPHERALS
-
-#endif /* IOT_SDK_PERIPHERALS_LED_H_ */
+#endif /* IOT_SDK_PERIPHERALS_SENSOR_DE_TEMPERATURA_H_ */

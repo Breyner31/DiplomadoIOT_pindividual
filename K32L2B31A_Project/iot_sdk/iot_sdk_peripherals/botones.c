@@ -1,39 +1,24 @@
-/*! @file : sensor_de_luz.c
+/*! @file : botones.c
  * @author  Breyner Lopez Granados
  * @version 1.0.0
- * @date    6/09/2021
- * @brief   Driver para 
+ * @date    7/09/2021
+ * @brief   Driver para lectura de botones en FRDM-K32L2B
  * @details
  *
 */
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-#include "sensor_de_luz.h"
-
-
+#include "botones.h"
 
 /*******************************************************************************
  * Definitions
  ******************************************************************************/
-#define SENSOR_DE_LUZ_ADC16_BASE         ADC0
-#define SENSOR_DE_LUZ_ADC16_CHANNEL_GROUP 0U
-#define SENSOR_DE_LUZ_ADC16_USER_CHANNEL 3U
+
 
 /*******************************************************************************
  * Private Prototypes
  ******************************************************************************/
-/*!
-//@brief Inicia captura de ADC de voltaje génerado por sensor de luz
- *
- */
- void SensorDeLuzIniciarCaptura(void);
-
- /*!
- //@brief Espera a que finalice el trabajo del ADC
-  *
-  */
- void SensorDeLuzEsperarResultado(void);
 
 
 /*******************************************************************************
@@ -49,34 +34,19 @@
 /*******************************************************************************
  * Private Source Code
  ******************************************************************************/
- void SensorDeLuzIniciarCaptura(void) {
-      ADC16_SetChannelConfig(
-     		 SENSOR_DE_LUZ_ADC16_BASE,
- 			 SENSOR_DE_LUZ_ADC16_CHANNEL_GROUP,
- 			 &ADC0_channelsConfig[0]);
-   }
-  /*------------------------------------------------------------------ */
- void SensorDeLuzEsperarResultado(void) {
- 	 while (0U == (kADC16_ChannelConversionDoneFlag &
- 	                      ADC16_GetChannelStatusFlags(SENSOR_DE_LUZ_ADC16_BASE, SENSOR_DE_LUZ_ADC16_CHANNEL_GROUP)))
- 	 {
-
- 	 }
- }
 
 
 /*******************************************************************************
  * Public Source Code
  ******************************************************************************/
+ bool boton1leerestado(){
+	 uint32_t valor_pin=GPIO_PinRead(GPIOC,3);
 
-/*------------------------------------------------------------------ */
-float SensorDeluzOptenerDatosADC() {
-	float resultadoADC;
+	 return(bool) valor_pin;
+ }
+ 
+ bool boton2leerestado(){
+	 uint32_t valor_pin=GPIO_PinRead(GPIOA,4);
 
-	  SensorDeLuzIniciarCaptura();
-	  SensorDeLuzEsperarResultado();
-
-	  	  resultadoADC=ADC16_GetChannelConversionValue(SENSOR_DE_LUZ_ADC16_BASE, SENSOR_DE_LUZ_ADC16_CHANNEL_GROUP);
-	  	  resultadoADC= (2*(3.3-(3.3/resultadoADC)))*100;
-	return (resultadoADC);
-}
+	 return(bool) valor_pin;
+  }

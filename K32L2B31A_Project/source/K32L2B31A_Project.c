@@ -42,6 +42,10 @@
 
 #include "led.h"
 #include "sensor_de_luz.h"
+#include "irq_lptmr0.h"
+#include "botones.h"
+#include "sensor_de_temperatura.h"
+
 /* TODO: insert other include files here. */
 
 /* TODO: insert other definitions and declarations here. */
@@ -49,20 +53,14 @@
 
 unsigned int test_global_var=100;
 float dato_float=3.1416;
-
-
-void delay_block(void){
-	uint32_t i;
-	for(i=0;i<0xFFFFf;i++){
-
-	}
-}
 /*
  * @brief   Application entry point.
  */
 int main(void) {
-int cont=0;
-uint32_t adc_sensor_de_luz;
+	float adc_sensor_de_luz;
+	float adc_sensor_de_temperatura;
+
+	bool boton1_oprimido,boton2_oprimido;
 
     /* Init board hardware. */
     BOARD_InitBootPins();
@@ -76,43 +74,59 @@ uint32_t adc_sensor_de_luz;
     PRINTF("Hello World\r\n");
     printf("test_global_var:%d\r\n", test_global_var);
     printf("dato_float:%g\r\n",dato_float);
+    /* Start counting */
+       LPTMR_StartTimer(LPTMR0);
 
-    encender_led_verde();
-    encender_led_rojo();
+       //* Trabajo para entregar
+       /*
+        * 1) Leer sensor de temperatura (Sensor interno del microcontrolador o usar uno externo (LM35)
+        * 2) Medida de sensor de luz en unidades de LUX
+        * 3) La medida de temperatura se imprima solo cuando se pulsa el boton1 y LUX cuando se pulsa el boton 2
+        *   * Debe imprimir en tiempo real (apenas se pulse el boton, de inmediato se imprime)
+        * 4) Organizar el GIT con los cambios hechos en clase + nuevos cambios de proyectos (tarea)
+        */
 
     /* Force the counter to be placed into memory. */
-    volatile static int i = 0 ;
+    /*volatile static int i = 0 ;
     /* Enter an infinite loop, just incrementing a counter. */
+
+
     while(1) {
-        i++ ;
-        printf("i:%u\r\n",i);
-        encender_led_verde();
-        delay_block();
-        apagar_led_verde();
-        delay_block();
 
-        adc_sensor_de_luz=SensorDeluzOptenerDatosADC();
-       printf("adc_sensor_de_luz:%u\r\n", adc_sensor_de_luz);
+    	if(lptmr0_irq_counter!=0){
+    		lptmr0_irq_counter=0;
 
-        if (i % 10 == 0){
-               	cont++;
-               	if (cont % 2 == 0){
-               	 apagar_led_rojo();
-               	}
-               	else{
-               	 encender_led_rojo();
-               	}
-               }
-               PRINTF("i:%u\r\n",i);
+    		boton1_oprimido = !boton1leerestado();
+    		boton2_oprimido = !boton2leerestado();
 
+    		if( boton1_oprimido && !flag_boton1_presionado){
+    			flag_boton1_presionado = 1;
+    			adc_sensor_de_luz = SensorDeluzOptenerDatosADC();
+    			printf("adc_sensor_de_luz:%.3f\r\n", adc_sensor_de_luz);
+    		}
 
+    		if( !boton1_oprimido){
+    			flag_boton1_presionado = 0;
+    		}
 
+    		if( boton2_oprimido && !flag_boton2_presionado){
+    		    			flag_boton2_presionado = 1;
+    		    			adc_sensor_de_temperatura = SensorDeTemperaturaOptenerDatosADC();
+    		 printf("temperatura:%.3f\r\n", adc_sensor_de_temperatura);
+    		    		}
 
+    		    		if( !boton2_oprimido){
+    		    			flag_boton2_presionado = 0;
+    		    		}
 
-        /* 'Dummy' NOP to allow source level single stepping of
-            tight while() loop */
-        __asm volatile ("nop");
+    	}
+    		if( flag_led_rojo_iqr_counter == 1000){  //* Enciende el led rojo cada 1 segundo
+    			flag_led_rojo_iqr_counter = 0;
+    			toggle_led_rojo();
+    		}
 
     }
     return 0 ;
 }
+
+

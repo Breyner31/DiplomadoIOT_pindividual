@@ -1,24 +1,24 @@
-/*! @file : led.h
+/*! @file : irq_lptmr0.h
  * @author  Breyner Lopez Granados
  * @version 1.0.0
- * @date    2/09/2021
- * @brief   Driver para controlar LEDS de tarjeta FRDM-K32L1B3
+ * @date    7/09/2021
+ * @brief   Driver para IRQ de LPTMR0
  * @details
  *
  */
-#ifndef IOT_SDK_PERIPHERALS_LED_H_
-#define IOT_SDK_PERIPHERALS_LED_H_
+#ifndef IOT_SDK_IRQ_IRQ_LPTMR0_H_
+#define IOT_SDK_IRQ_IRQ_LPTMR0_H_
 /*******************************************************************************
  * Includes
  ******************************************************************************/
-
+#include "peripherals.h"
 
 /*!
- * @addtogroup PERIPHERALS
+ * @addtogroup IRQ
  * @{
  */
 /*!
- * @addtogroup LEDS
+ * @addtogroup LPTMR0
  * @{
  */
 /*******************************************************************************
@@ -32,29 +32,15 @@
 /*******************************************************************************
  * Public vars
  ******************************************************************************/
-
+extern volatile uint32_t lptmr0_irq_counter;
+extern volatile uint32_t flag_led_rojo_iqr_counter;
+extern volatile uint32_t flag_boton1_presionado;
+extern volatile uint32_t flag_boton2_presionado;
 /*******************************************************************************
  * Public Prototypes
  ******************************************************************************/
 
-//@brief enciende led verde de la tarjeta FRMD-K32L2B3
- void encender_led_verde();
+/** @} */ // end of LPTMRO group
+/** @} */ // end of IRQ group
 
- //@brief apaga led verde de la tarjeta FRMD-K32L2B3
- void apagar_led_verde();
-
- //@brief enciende led rojo de la tarjeta FRMD-K32L2B3
- void encender_led_rojo();
-
-
- //@brief apaga led rojo de la tarjeta FRMD-K32L2B3
- void apagar_led_rojo();
-
-
- //@brief Invierte el estado del led rojo de la tarjeta FRMD-K32L2B3
- void toggle_led_rojo();
-
-/** @} */ // end of X LEDS
-/** @} */ // end of X PERIPHERALS
-
-#endif /* IOT_SDK_PERIPHERALS_LED_H_ */
+#endif /* IOT_SDK_IRQ_IRQ_LPTMR0_H_ */

@@ -77,18 +77,9 @@ int main(void) {
     /* Start counting */
        LPTMR_StartTimer(LPTMR0);
 
-       //* Trabajo para entregar
-       /*
-        * 1) Leer sensor de temperatura (Sensor interno del microcontrolador o usar uno externo (LM35)
-        * 2) Medida de sensor de luz en unidades de LUX
-        * 3) La medida de temperatura se imprima solo cuando se pulsa el boton1 y LUX cuando se pulsa el boton 2
-        *   * Debe imprimir en tiempo real (apenas se pulse el boton, de inmediato se imprime)
-        * 4) Organizar el GIT con los cambios hechos en clase + nuevos cambios de proyectos (tarea)
-        */
-
     /* Force the counter to be placed into memory. */
     /*volatile static int i = 0 ;
-    /* Enter an infinite loop, just incrementing a counter. */
+    //* Enter an infinite loop, just incrementing a counter. */
 
 
     while(1) {
@@ -111,14 +102,13 @@ int main(void) {
 
     		if( boton2_oprimido && !flag_boton2_presionado){
     		    			flag_boton2_presionado = 1;
-    		    			adc_sensor_de_temperatura = SensorDeTemperaturaOptenerDatosADC();
+    		    			adc_sensor_de_temperatura = SensorDeTemperaturaObtenerDatosADC();
     		 printf("temperatura:%.3f\r\n", adc_sensor_de_temperatura);
     		    		}
 
     		    		if( !boton2_oprimido){
     		    			flag_boton2_presionado = 0;
     		    		}
-
     	}
     		if( flag_led_rojo_iqr_counter == 1000){  //* Enciende el led rojo cada 1 segundo
     			flag_led_rojo_iqr_counter = 0;
